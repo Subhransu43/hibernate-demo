@@ -22,7 +22,7 @@ public class App
         
         try {
         	//Createing student object
-        	Student student = new Student("Subhransu", "Bhandari", "subhransu.bhandari@outlook.com");
+        	/*Student student = new Student("Daffy", "Duck", "daffy.duck@outlook.com");
         	System.out.println(student.toString());
         	
         	//Start Transction
@@ -32,6 +32,18 @@ public class App
         	session.save(student);
         	
         	//Commit Tracsction
+        	session.getTransaction().commit();
+        	*/
+        	//Reading data drom DB
+        	
+        	//System.out.println("Fetching data for ID: "+student.getId());
+        	
+        	session = factory.getCurrentSession();
+        	session.beginTransaction();
+        	
+        	Student stu = session.get(Student.class, 3);
+        	System.out.println("Data : "+stu.toString());
+        	
         	session.getTransaction().commit();
         	
         } finally {
