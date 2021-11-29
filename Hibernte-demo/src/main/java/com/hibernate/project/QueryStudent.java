@@ -30,9 +30,25 @@ public class QueryStudent
         	List<Student> allStudent = session.createQuery("from Student").getResultList();
         	
         	//Print all student
-        	for(Student tempStudent : allStudent) {
-        		System.out.println(tempStudent);
-        	}
+        	displayStudent(allStudent);
+        	
+        	//Query student with last name Bhandari
+        	System.out.println("All student with lastName Bhandari :");
+        	allStudent = session.createQuery("from Student s where s.lastName='Bhandari'").getResultList();
+
+        	displayStudent(allStudent);
+        	
+        	//Using OR in HQL
+        	System.out.println("All Student with First name Daffy or Last name Bhandari");
+        	allStudent = session.createQuery("from Student s where s.firstName='Daffy' OR s.lastName='Bhandari'").getResultList();
+                    	
+        	displayStudent(allStudent);
+        	
+        	//Using LIKE in HQL
+        	System.out.println("All Student with Email like '@outlook.com'");
+        	allStudent = session.createQuery("from Student s where s.email LIKE '%@outlook.com'").getResultList();
+        	
+        	displayStudent(allStudent);
         	
         	//Commit Transaction
         	session.getTransaction().commit();
@@ -41,4 +57,10 @@ public class QueryStudent
         	factory.close();
         }
     }
+
+	private static void displayStudent(List<Student> allStudent) {
+		for(Student tempStudent : allStudent) {
+			System.out.println(tempStudent);
+		}
+	}
 }
